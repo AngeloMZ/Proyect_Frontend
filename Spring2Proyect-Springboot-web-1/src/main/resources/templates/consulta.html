@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>LISTADO DE EMPRESAS</title>
+	</head>
+	<body>
+		<h3>Usuario: <span th:text="${usuario.nombre}"></span></h3>
+		<h3>Password: <span th:text="${usuario.password}"></span></h3>
+		<h1>LISTADO DE EMPRESAS</h1>
+		<table border="1">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Nombre</th>
+					<th>Descripción</th>
+					<th>Borrado</th>
+					<th>Modificar</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:if="${empresas.empty}">
+					<td colspan="5">No hay empresas disponibles</td>
+				</tr>
+				<tr th:each="empresa : ${empresas}">
+					<td><span th:text="${empresa.id}"></span></td>
+					<td><span th:text="${empresa.nom}"></span></td>
+					<td><span th:text="${empresa.descripcio}"></span></td>
+					<td><a th:href="@{'/borrado/' + ${empresa.id}}">Borrado</a></td>
+					<td><a th:href="@{'/modificar/' + ${empresa.id}}">Modificar</a></td>
+				</tr>
+			</tbody>
+		</table>
+		<form action="${action}" method="post">
+			<br>ID: <input type="text" name="id" th:value="${empresa?.id}">
+				NOMBRE: <input type="text" name="nom" th:value="${empresa?.nom}">
+				DESCRIPCIÓN: <input type="text" name="descripcio" th:value="${empresa?.descripcio}"><br><br>
+				<input type="submit" name="submit" value="${boton}">
+		</form>
+	</body>
+</html>
